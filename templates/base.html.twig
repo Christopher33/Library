@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </head>
+    <body>
+    <header>
+        <div class="box_header">
+            <h1 class="titre">Ma bibliotèque</h1>
+            <nav>
+                <label for="site-search">Recherche :</label>
+                <input type="search" id="site-search" name="q"
+                       aria-label="mot clef">
+                <button>Recherche</button>
+
+                <a href="{{ path('author_list') }}">{% block title_book %}{% endblock %}</a>
+                <a href="{{ path('book_list') }}">{% block title_author %}{% endblock %}</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="book">
+            {% block section %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="box_footer">
+            <span>Author</span>
+            <span>Book</span>
+            <span>Blanche neige</span>
+        </div>
+    </footer>
+    </body>
+</html>

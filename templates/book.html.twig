@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title_book %}Nos autheurs{% endblock %}
+
+{% block section %}
+
+    {% for book in book %}
+        <p class="box_book">
+            <a href="{{ path('book', {'id': book.id} ) }}">{{ book.title }}</a>
+            : {{ book.nbpages }} pages. <br>
+            Catégorie :{{ book.style}} <br>
+
+            {% if book.stock == 1 %}
+                <span class="color_dispo">Le livre est disponible</span>
+            {% else %}
+                <span class="color_noDispo">Non disponible</span>
+            {% endif %}
+
+        </p>
+    {% endfor %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title_author %}Nos livres{% endblock %}
+
+{% block section %}
+
+{% for authors in author %}
+    <p class="box_author">
+        <span>{{ authors.name }} {{ authors.firstname }}</span><br>
+        <strong>Née le :</strong> {{ authors.birthdate | date("m/d/Y") }}
+
+            {% if authors.deathDate == true %}
+                <br><strong>Mort le :</strong>{{ authors.DeathDate | date("m/d/Y") }}
+            {%  endif %}
+    </p>
+{% endfor %}
+
+</div>
+{% endblock %}

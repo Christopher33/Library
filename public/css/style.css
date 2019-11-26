@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    padding-left: 30px;
+}
+.box_header{
+    height: 20vh;
+    line-height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: cadetblue;
+}
+nav a{
+    padding-right: 20px;
+    text-decoration: none;
+    font-family: Dosis;
+    font-size: 22px;
+    color: white;
+}
+nav a:hover{
+    padding-right: 20px;
+    color: White;
+    font-family: Dosis;
+    font-size: 25px;
+}
+.titre{
+    font-family: Dosis;
+    color: rgb(218, 221, 216);
+    font-size: 50px;
+}
+.book{
+    color: #313131;
+    font-size: 16px;
+}
+.box_footer{
+    height: 10vh;
+    line-height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    text-align: center;
+    background-color: cadetblue;
+}
+main{
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+main div p{
+    color: #313131;
+    font-size: 20px;
+    font-family: Dosis;
+    padding: 5px;
+}
+footer span{
+    color: white;
+    font-family: Dosis;
+    font-size: 20px;
+}
+.box_book{
+    padding: 15px;
+}
+.color_dispo{
+    color: #718C00;
+}
+.color_noDispo{
+    color: #B0413E;
+}
+.box_author{
+    padding: 20px;
+}
