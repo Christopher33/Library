@@ -42,8 +42,6 @@ class AuthorController extends AbstractController
         // grace a symfony on obtient l'instance de la classe repository en la passant simplement en parametre
         $authors = $authorRepository->getAuthorByBio($word);
 
-        //
-
         return $this->render('finder.authors.html.twig', [
             'found' => $authors
         ]);
