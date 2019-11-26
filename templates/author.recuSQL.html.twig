@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+
+    <div>
+        <p>Requete enregistré dans la base de donné "Library"</p>
+        <span>Prénom et Nom de l'autheur : {{ author.firstname }} {{ author.name }}</span><br>
+        <span>Année de naissance : {{ author.birthDate | date('d/m/Y')}}</span><br>
+        <span>Biographie : {{ author.biographie }}</span><br>
+    </div>
+
+{% endblock %}

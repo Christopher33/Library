@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Repository\AuthorRepository;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,6 +21,25 @@ class AuthorController extends AbstractController
 
         return $this->render('author.html.twig', [
             'author' => $author
+        ]);
+    }
+
+    /**
+     * @Route("/author/insert", name="author_insert")
+     */
+    public function insertAuthor(EntityManagerInterface $entityManager){
+        $author = new Author();
+        $author->setFirstname('Florian');
+        $author->setName('Soumaille');
+        $author->setBirthDate(new \DateTime('03/04/1986'));
+        $author->setBiographie('Je suis Flo, le beau et le plus fort, bla bla bla...');
+
+        $entityManager->persist($author);
+        $entityManager->flush();
+
+        return $this->render('author.recuSQL.html.twig', [
+            'author' => $author,
+
         ]);
     }
 

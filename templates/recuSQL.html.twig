@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+
+    <div>
+        <p>Requete enregistré dans la base de donné "Library"</p>
+        <span>Titre du livre : {{ book.title }}</span><br>
+        <span>Genre : {{ book.style }}</span><br>
+        <span>Nombre de pages : {{ book.nbpages }}</span><br>
+        <sapn>Disponibilité : {{ book.stock }}</sapn>
+    </div>
+
+{% endblock %}
