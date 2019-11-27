@@ -44,6 +44,40 @@ class AuthorController extends AbstractController
     }
 
     /**
+     * @Route("/author/delete/{id}", name="author_delete")
+     */
+    public function deleteAuthor(AuthorRepository $authorRepository, EntityManagerInterface $entityManager, $id)
+    {
+        // je recupère un enregistrement book en BDD grace au repository de book
+        $author = $authorRepository->find($id);
+
+        //j'utilise l'entity manager avec la méthode remove pour enregistrer
+        //la suppression du book dans l'unité du travail
+        $entityManager->remove($author);
+        // je valide la suppression en BDD avec la méthode flush
+        $entityManager->flush();
+
+        return $this->redirectToRoute('author.html.twig', [
+            'author' => $author
+        ]);
+    }
+
+    /**
+     * @Route("/author/update/{id}", name="author_update")
+     */
+    public function authorUpdate(AuthorRepository $authorRepository, EntityManagerInterface $entityManager, $id)
+    {
+        $author = $authorRepository->find($id);
+
+        $author->setFirstname('Franky');
+
+        $entityManager->persist($author);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('author_list');
+    }
+
+    /**
      * @Route ("/author/{id}", name="author")
      */
     public function authorShow(AuthorRepository $authorRepository, $id){
@@ -66,9 +100,11 @@ class AuthorController extends AbstractController
         $authors = $authorRepository->getAuthorByBio($word);
 
         return $this->render('finder.authors.html.twig', [
-            'found' => $authors
+            'author' => $authors
         ]);
 
     }
+
+
 
 }

@@ -4,14 +4,18 @@
 
 {% block section %}
 
-{% for authors in author %}
+{% for author in author %}
     <p class="box_author">
-        <span>{{ authors.name }} {{ authors.firstname }}</span><br>
-        <strong>Née le :</strong> {{ authors.birthdate | date("m/d/Y") }}
+        <span>{{ author.name }} {{ author.firstname }}</span><br>
+        <strong>Née le :</strong> {{ author.birthdate | date("m/d/Y") }}
 
-            {% if authors.deathDate == true %}
-                <br><strong>Mort le :</strong>{{ authors.DeathDate | date("m/d/Y") }}
+            {% if author.deathDate == true %}
+                <br><strong>Mort le :</strong>{{ author.DeathDate | date("m/d/Y") }}
             {%  endif %}
+
+        <a href="{{ path('author_delete', {'id': author.id}) }}" class="case">Supprimer</a>
+        <a href="{{ path('author_update', {'id': author.id}) }}" class="modifier">Modifier Prénom</a>
+
     </p>
 {% endfor %}
 

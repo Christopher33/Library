@@ -79,3 +79,43 @@ footer span{
 .box_author{
     padding: 20px;
 }
+.case{
+    padding: 5px;
+    background-color: #B0413E;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    margin: 5px;
+}
+.modifier{
+    padding: 5px;
+    background-color: forestgreen;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    margin: 5px;
+}
+.big_box{
+    display: flex;
+}
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    align-items: flex-start;
+    font-size: 20px;
+    background-color: #565656;
+    border-radius: 4px;
+    color: white;
+    padding: 20px;
+}
+.form div{
+    margin: 20px;
+}
+
+.form div label{
+    margin-right: 10px;
+}

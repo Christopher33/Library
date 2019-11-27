@@ -5,18 +5,27 @@
 {% block section %}
 
     {% for book in book %}
-        <p class="box_book">
-            <a href="{{ path('book', {'id': book.id} ) }}">{{ book.title }}</a>
-            : {{ book.nbpages }} pages. <br>
-            Catégorie :{{ book.style}} <br>
 
-            {% if book.stock == 1 %}
-                <span class="color_dispo">Le livre est disponible</span>
-            {% else %}
-                <span class="color_noDispo">Non disponible</span>
-            {% endif %}
+        <div class="big_box">
+            <div class="box">
+                <p class="box_book">
+                    <a href="{{ path('book', {'id': book.id} ) }}">{{ book.title }}</a>
+                    : {{ book.nbpages }} pages. <br>
+                    Catégorie :{{ book.style}} <br>
 
-        </p>
+                    {% if book.stock == 1 %}
+                        <span class="color_dispo">Le livre est disponible</span>
+                    {% else %}
+                        <span class="color_noDispo">Non disponible</span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="box">
+                <a href="{{ path('book_delete', {'id': book.id}) }}" class="case">Supprimer</a>
+                <a href="{{ path('book_update', {'id': book.id}) }}" class="modifier">Modifier le titre</a>
+            </div>
+        </div>
+
     {% endfor %}
 
     </div>

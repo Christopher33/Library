@@ -1,0 +1,11 @@
+{# je crée le html de mon formulaire (balise form, input etc) en utilisant la fonction
+ form() avec en parametre ma variable de formulaire  #}
+{% extends 'base.html.twig' %}
+
+{% block section %}
+
+<div class="form">
+    {{ form(bookFormView) }}
+</div>
+
+{% endblock %}
