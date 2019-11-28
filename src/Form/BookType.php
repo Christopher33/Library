@@ -5,8 +5,11 @@ namespace App\Form;
 use App\Entity\Book;
 use PhpParser\Node\NullableType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,16 +18,16 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('NBpages')
-            ->add('style', ChoiceType::class, [
+            ->add('title',TextType::class, ['label' => 'Titre du livre :'])
+            ->add('NBpages',IntegerType::class, ['label' => 'Nombre de pages :'])
+            ->add('style',ChoiceType::class, [
                 'choices' => [
                     'Thriller' => 'thriller',
                     'Policier' => 'policier',
                     'Roman' => 'roman'
-                ]
+                ], 'label' => 'Genre'
             ])
-            ->add('stock')
+            ->add('stock',CheckboxType::class)
             ->add('Envoyer', SubmitType::class)
         ;
     }

@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
@@ -77,9 +78,7 @@ class BookController extends AbstractController
             // je valide la suppression en BDD avec la méthode flush
             $entityManager->flush();
 
-            return $this->redirectToRoute('book.html.twig', [
-                'book' => $book
-            ]);
+            return $this->redirectToRoute('book.html.twig');
     }
 
     /**
@@ -101,7 +100,7 @@ class BookController extends AbstractController
     /**
      * @Route("/book/form", name="book_form")
      */
-    public function insertBookFrom()
+    public function insertBookFrom(Request $request, EntityManagerInterface $entityManager)
     {
         // J'utilise le gabarit de formulaire pour créer mon formulaire
         // j'envoie mon formulaire à un fichier twig
@@ -116,6 +115,24 @@ class BookController extends AbstractController
         // Et je lui associe mon entité Book vide
         $bookForm = $this->createForm(BookType::class, $book);
 
+        // Si je suis sur une méthode POST
+        // donc qu'un formulaire a été envoyé
+        if ($request->isMethod('Post')) {
+            // Je récupère les données de la requête (POST)
+            // et je les associe à mon formulaire
+            $bookForm->handleRequest($request);
+            // Si les données de mon formulaire sont valides
+            // (que les types rentrés dans les inputs sont bons,
+            // que tous les champs obligatoires sont remplis etc)
+            if ($bookForm->isValid()) {
+                // J'enregistre en BDD ma variable $book
+                // qui n'est plus vide, car elle a été remplie
+                // avec les données du formulaire
+                $entityManager->persist($book);
+                $entityManager->flush();
+            }
+        }
+
         // à partir de mon gabarit, je crée la vue de mon formulaire
         $bookFormView = $bookForm->createView();
 
@@ -124,7 +141,30 @@ class BookController extends AbstractController
         return $this->render('book_form.html.twig', [
             'bookFormView' => $bookFormView
         ]);
+    }
 
+    /**
+     * @Route("/book/update_form/{id}", name="book_update_form")
+     */
+    public function updateBookForm(BookRepository $bookRepository, Request $request, EntityManagerInterface $entityManager, $id)
+    {
+        $book = $bookRepository->find($id);
+        $bookForm = $this->createForm(BookType::class, $book);
+        if ($request->isMethod('Post'))
+        {
+            $bookForm->handleRequest($request);
+            if ($bookForm->isValid()) {
+                $entityManager->persist($book);
+                $entityManager->flush();
+            }
+        }
+        // à partir de mon gabarit, je crée la vue de mon formulaire
+        $bookFormView = $bookForm->createView();
+        // je retourne un fichier twig, et je lui envoie ma variable qui contient
+        // mon formulaire
+        return $this->render('book_form.html.twig', [
+            'bookFormView' => $bookFormView
+        ]);
     }
 
     /**
